@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title></title>
+  <style>
+    table tr td{
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+  </style>
+</head>
+<body>
+  one:<input type="text" name="" id="one">
+  two:<input type="text" name="" id="two">
+  three:<input type="text" name="" id="three">
+  <input type="submit" value="check" id="chk">
+  <input type="button" id="ipt" value="hide">
+  <input type="button" id="ipt1" value="show">
+  <input type="text" id="tex" value="" placeholder="">
+  <button id="sea" type="">search</button>
+  <table id="tab" style="border-collapse:collapse;table-layout:fixed;" border="1px solid #222" cellspacing="0">
+    <thead >
+      <tr>
+        <th>one</th>
+        <th>two</th>
+        <th>three</th>
+        <th>header</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td width="20px">1</td>
+        <td>data</td>
+        <td>data</td>
+        <td><a href="javescript:;">del</a></td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>memony</td>
+        <td>data</td>
+        <td><a href="javescript:;">del</a></td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>dollor</td>
+        <td>data</td>
+        <td><a href="javescript:;">del</a></td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>ccc</td>
+        <td>data</td>
+        <td><a href="javescript:;">del</a></td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Abc</td>
+        <td>data</td>
+        <td><a href="javescript:;">del</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+<script>
+  window.onload=function(){
+    var ipt = document.getElementById('ipt')
+    var ipt1 = document.getElementById('ipt1')
+    var oTr = document.getElementsByTagName('tr')
+    var oTab = document.getElementById('tab')
+    var row = oTab.getElementsByTagName('tbody')[0].getElementsByTagName('tr')[0]
+    for(var i = 0;i< oTr.length-1;i++){
+      var num = document.getElementById('tex').value
+      ipt.onclick=function(){
+        row.style.display = 'none'
+      }
+      ipt1.onclick=function(){
+        row.style.display = 'table-row'
+      }
+    }
+
+
+    //增加行数
+    var One = document.getElementById('one')
+    var Two = document.getElementById('two')
+    var Three = document.getElementById('three')
+    var Che = document.getElementById('chk')
+    var id = oTab.tBodies[0].rows.length;
+    Che.onclick=function(){
+      var or = document.createElement('tr')
+      // 增加td
+      var od = document.createElement('td')
+      // od.innerHTML = ++id
+      or.appendChild(od)
+
+      var od = document.createElement('td')
+      od.innerHTML = One.value;
+      or.appendChild(od)
+
+      var od = document.createElement('td')
+      od.innerHTML = Two.value;
+      or.appendChild(od)
+
+      var od = document.createElement('td')
+      od.innerHTML = '<a href="javascript:;">del</a>'
+      or.appendChild(od)
+
+      oTab.tBodies[0].appendChild(or);
+
+
+      //删除整行
+    var arr = oTab.tBodies[0].getElementsByTagName('a')
+    var oa = document.getElementsByTagName('a')
+    for(var j = 0;j<oa.length;j++){
+      arr[j].onclick=function(){
+          oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+      }
+    }
+
+
+     //隔行变色
+    var oTrs = oTab.tBodies[0].rows;
+    var oa = document.getElementsByTagName('a')
+    var oCol = null;
+    for(var i = 0; i<oTrs.length;i++){
+      if(i%2 == 0){
+        oTrs[i].style.background = '#bbb';
+      }
+      oTrs[i].onmouseover=function(){
+        oCol = this.style.backgroundColor;
+        this.style.backgroundColor = '#fff';
+      }
+      oTrs[i].onmouseout=function(){
+        this.style.backgroundColor = oCol;
+      }
+    }
+    }
+
+
+
+
+
+    //隔行变色
+    var oTrs = oTab.tBodies[0].rows;
+    var oa = document.getElementsByTagName('a')
+    var oCol = null;
+    for(var i = 0; i<oTrs.length;i++){
+      if(i%2 == 0){
+        oTrs[i].style.background = '#bbb';
+      }
+      oTrs[i].onmouseover=function(){
+        oCol = this.style.backgroundColor;
+        this.style.backgroundColor = '#fff';
+      }
+      oTrs[i].onmouseout=function(){
+        this.style.backgroundColor = oCol;
+      }
+    }
+
+
+     //删除整行
+    var arr = oTab.tBodies[0].getElementsByTagName('a')
+    for(var j = 0;j<oa.length;j++){
+      arr[j].onclick=function(){
+          oTab.tBodies[0].removeChild(this.parentNode.parentNode);
+      }
+    }
+
+    // 搜索关键字
+    var oTex = document.getElementById('tex');
+    var oSe = document.getElementById('sea')
+    var Tr = oTab.tBodies[0].getElementsByTagName('tr')
+    // alert(Tr.length)
+    oSe.onclick=function(){
+      for(var i = 0; i<Tr.length;i++){
+        var str1 = oTab.tBodies[0].rows[i].cells[1].innerHTML;
+        var str2 = oTex.value;
+          // alert(str1)
+          // alert(str2)
+        if(str1 == str2){
+          oTab.tBodies[0].rows[i].style.background="blue";
+        }else{
+          oTab.tBodies[0].rows[i].style.background=oCol
+        }
+      }
+    }
+  }
+</script>
